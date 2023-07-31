@@ -10,7 +10,7 @@ import products from "../../services/products";
 const Details = () => {
 const { addItemCart } = useContext(CartContext);
 const { id } = useParams();
-const productId = id? parseInt(id): null
+const productId = id? parseInt(id): ''
 
 const product = products.find((product: IProduct) => product.id === productId);
 
