@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "allowSyntheticDefaultImports": true,
+    "allowImportingTsExtensions": true,
+    "target": "ES2019", // Alterado de "ES2020" para "ES2019"
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
-    "skipLibCheck": true,
+    "lib": ["ES2019", "DOM", "DOM.Iterable"], // Alterado de "ES2020" para "ES2019"
+    "module": "ES2020", // Alterado de "ESNext" para "ES2020"
+    "skipLibCheck": false, // Alterado de "true" para "false"
 
     /* Bundler mode */
     "moduleResolution": "node",
