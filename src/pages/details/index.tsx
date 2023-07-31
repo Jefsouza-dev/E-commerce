@@ -1,27 +1,20 @@
-import { useState, useEffect, useContext } from "react";
+import { useContext } from "react";
 import { useParams } from "react-router-dom";
-import { api } from "../../services/api";
 import { IProduct } from "../../interfaces/products";
 import { formatedPrice } from "../../services/formatedPrice";
 import { BsCartPlus } from "react-icons/bs";
 import { CartContext } from "../../contexts/CartContext";
 import { toast } from "react-hot-toast";
+import products from "../../services/products";
 
 const Details = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState<IProduct>();
-  const { addItemCart } = useContext(CartContext);
+const { addItemCart } = useContext(CartContext);
+const { id } = useParams();
+const productId = id? parseInt(id): null
 
-  useEffect(() => {
-    async function getProduct() {
-      const response = await api.get(`products/${id}`);
-      setProduct(response.data);
-    }
+const product = products.find((product: IProduct) => product.id === productId);
 
-    getProduct();
-  }, [id]);
-
-  function handleAddItem(product: IProduct) {
+function handleAddItem(product: IProduct) {
     addItemCart(product);
 
     toast.success("Produto adicionado no carrinho", {

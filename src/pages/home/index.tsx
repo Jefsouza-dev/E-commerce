@@ -1,27 +1,19 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import { BsCartPlus } from "react-icons/bs";
 
 import { Link } from "react-router-dom";
 
-import { api } from "../../services/api";
 import { IProduct } from "../../interfaces/products";
 import { CartContext } from "../../contexts/CartContext";
 import { formatedPrice } from "../../services/formatedPrice";
+import products from "../../services/products";
 
 import toast from "react-hot-toast";
 
 const Home = () => {
-  const [products, setProducts] = useState<IProduct[]>([]);
+
   const { addItemCart } = useContext(CartContext);
 
-  useEffect(() => {
-    async function getProducts() {
-      const response = await api.get("/products");
-      setProducts(response.data);
-    }
-
-    getProducts();
-  }, []);
 
   const handleAddCartItem = (product: IProduct) => {
     toast.success("Produto adicionado no carrinho", {
@@ -42,7 +34,7 @@ const Home = () => {
         </h1>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-16">
-          {products.map((product) => {
+          {products.map((product:IProduct) => {
             return (
               <section className="w-full mb-16" key={product.id}>
                 <Link to={`/produto/${product.id}`}>
